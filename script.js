@@ -30,3 +30,21 @@ const arr = [
   new Book("author3", 2005, 50, 25),
   new Book("author4", 2010, 80, 65),
 ];
+
+let nums = [1, 2, 3, 1, 1, 3];
+let nums2 = [1, 1, 1, 1];
+
+function getGoodPairs(arr) {
+  let goodPairs = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] == arr[j]) {
+        goodPairs++;
+      }
+    }
+  }
+  return goodPairs;
+}
+
+console.log(getGoodPairs(nums)); // 4
+console.log(getGoodPairs(nums2)); // 6
