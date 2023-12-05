@@ -15,9 +15,10 @@ class Book {
   }
 
   turnPage() {
-    for (let i = this.currentPage; i <= this.pagesCount; i++) {
+    for (let i = this.currentPage; i < this.pagesCount; i++) {
       console.log(`current page in ${this.author}`, i);
-      if (i === this.pagesCount) {
+      this.currentPage++;
+      if (this.currentPage === this.pagesCount) {
         console.log(`Done! The ${this.author}'s book is over.`);
       }
     }
@@ -30,6 +31,11 @@ const arr = [
   new Book("author3", 2005, 50, 25),
   new Book("author4", 2010, 80, 65),
 ];
+
+for (let book of arr) {
+  console.log(book.turnPage());
+  console.log(book.currentPage);
+}
 
 let nums = [1, 2, 3, 1, 1, 3];
 let nums2 = [1, 1, 1, 1];
