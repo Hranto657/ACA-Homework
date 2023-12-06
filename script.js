@@ -32,11 +32,6 @@ const arr = [
   new Book("author4", 2010, 80, 65),
 ];
 
-for (let book of arr) {
-  console.log(book.turnPage());
-  console.log(book.currentPage);
-}
-
 let nums = [1, 2, 3, 1, 1, 3];
 let nums2 = [1, 1, 1, 1];
 
@@ -52,5 +47,48 @@ function getGoodPairs(arr) {
   return goodPairs;
 }
 
-console.log(getGoodPairs(nums)); // 4
-console.log(getGoodPairs(nums2)); // 6
+// Lesson 3 Homework
+
+// Սարքել Employee Class-ը, որը իրենից կներկայացնի ինչ-որ աշխատակցի նկարագրություն։
+// Բոլոր աշխատողները պետք է ունենան անուն, պաշտոն ու աշխատելու ֆունկցիա։ Աշխատելու ֆունկցիան կանչելիս անհրաժեշտ է ուղղակի տպել “working”.
+// Պետք է նաև ունենալ մեկ այլ class, որի անունը կլինի Manager.
+// Մենեջերը պետք է ունենա նույն հնարավորությունները ինչ որ սովորական աշխատակիցը, ուղղակի պետք է նաև ունենա haveMeetings ֆունկցիա,
+// որը կանչելու դեպքում պետք է տպել “մենեջերի անունը+is in the meeting”. Կարող եք սարքել ևս մեկ կլասս՝ ըստ ցանկության
+
+class Employee {
+  constructor(name, position) {
+    this.name = name;
+    this.position = position;
+  }
+
+  work() {
+    console.log("working");
+  }
+}
+
+const worker = new Employee("Jack", "engineer");
+console.log(worker.work()); // working
+
+class Manager extends Employee {
+  haveMeetings() {
+    console.log(`${this.name} is in the meeting`);
+  }
+}
+
+const manager = new Manager("Chloe", "manager");
+console.log(manager.work()); // working
+console.log(manager.haveMeetings()); // Chloe is in the meeting
+
+class Director extends Employee {
+  eat() {
+    console.log(`${this.name} is eating`);
+  }
+  sleep() {
+    console.log(`${this.name} is sleeping`);
+  }
+}
+
+const director = new Director("Leonardo", "director");
+
+console.log(director.work()) // working
+console.log(director.sleep()) // Leonardo is sleeping
