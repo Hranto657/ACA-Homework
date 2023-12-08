@@ -130,3 +130,127 @@ const newProduct2 = new PersonalCareProduct(25, "water", 1500, 10, 850);
 
 console.log(newProduct1.calculateTotalPrice()); // 13500
 console.log(newProduct2.calculateTotalPrice()); // 15850
+
+// LESSON4 Homework 2
+
+var bunny = {
+  lovesCarrots: true,
+  f: function () {
+    return this.lovesCarrots;
+  },
+};
+
+console.log(bunny.f()); // true
+// ---------------------------------------------------
+var person = {
+  firstName: "Penelope",
+  lastName: "Barrymore",
+  getName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+console.log(person.getName()); // Penelope Barrymore
+// ---------------------------------------------------
+var o = {
+  prop: 37,
+  f: function () {
+    return this.prop;
+  },
+};
+console.log(o.f()); // 37
+// ---------------------------------------------------
+var golfGames = {
+  tournament: "The Masters",
+  players: [
+    { name: "T. Woods", age: 37 },
+    { name: "P. Mickelson", age: 43 },
+  ],
+  showAllGames: function () {
+    currObject = this;
+    this.players.forEach(function (player) {
+      console.log(player.name + " is playing at " + currObject.tournament);
+    });
+  },
+};
+
+golfGames.showAllGames(); // T. Woods is playing at The Masters, P. Mickelson is playing at The Masters
+// ---------------------------------------------------
+var player1 = {
+  firstName: "Jack",
+  lastName: "Black",
+  getName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+var player2 = {
+  firstName: "Bunny",
+  lastName: "Rabbit",
+  getName: function () {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+var game = {
+  players: [],
+
+  listPlayers: function () {
+    this.players.forEach(function (player) {
+      console.log(player.getName());
+    });
+  },
+};
+
+game.players.push(player1, player2);
+game.listPlayers(); // Jack Black, Bunny Rabbit
+// ---------------------------------------------------
+function setBodyTextColor(color) {
+  this.body.style.color = color;
+}
+
+document.setBodyTextColor = setBodyTextColor;
+document.setBodyTextColor("green");
+document.setBodyTextColor("blue");
+
+function getBodyTextColor() {
+  return this.body.style.color;
+}
+
+document.getBodyTextColor = getBodyTextColor;
+console.log(document.getBodyTextColor()); // blue
+// ---------------------------------------------------
+var Counter = {
+  count: 0,
+  add: function () {
+    this.count++;
+  },
+};
+
+Counter.add();
+console.log(Counter.count); // 1
+var addToCount = Counter.add;
+addToCount();
+console.log(Counter.count); // 1
+// ---------------------------------------------------
+var Counter = {
+  count: 0,
+  add: function(){
+    this.count++;
+  }
+}
+
+Counter.add();
+console.log(Counter.count); // 1
+
+var AnotherCounter = {};
+AnotherCounter.count = Counter.count;
+AnotherCounter.add = Counter.add;
+AnotherCounter.add();
+
+console.log(AnotherCounter.count);// 2
+console.log(Counter.count) // 1
+
+var YetAnotherCounter = Counter;
+Counter.add();// 1
+console.log(YetAnotherCounter.count) // 2
