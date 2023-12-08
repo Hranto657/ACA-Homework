@@ -67,7 +67,7 @@ class Employee {
 }
 
 const worker = new Employee("Jack", "engineer");
-console.log(worker.work()); // working
+// console.log(worker.work()); // working
 
 class Manager extends Employee {
   haveMeetings() {
@@ -76,8 +76,8 @@ class Manager extends Employee {
 }
 
 const manager = new Manager("Chloe", "manager");
-console.log(manager.work()); // working
-console.log(manager.haveMeetings()); // Chloe is in the meeting
+// console.log(manager.work()); // working
+// console.log(manager.haveMeetings()); // Chloe is in the meeting
 
 class Director extends Employee {
   eat() {
@@ -90,5 +90,42 @@ class Director extends Employee {
 
 const director = new Director("Leonardo", "director");
 
-console.log(director.work()) // working
-console.log(director.sleep()) // Leonardo is sleeping
+// console.log(director.work()) // working
+// console.log(director.sleep()) // Leonardo is sleeping
+
+// Write a JavaScript program that creates a class called Product with properties for product ID, name, and price.
+// Include a method to calculate the total price by multiplying the price by the quantity
+// (quantity: քանակ, պետք ա փոխանվել ֆունկցիային որպես պարամետր).
+// Create a subclass called PersonalCareProduct that inherits from the Product class and adds an additional property for the additional tax.
+// Override the total price calculation method to add the special tax amount to the total price calculation.
+// Create an instance of the PersonalCareProduct class and calculate its total price.
+
+class Product {
+  constructor(productId, productName, price, quantity) {
+    this.productId = productId;
+    this.productName = productName;
+    this.price = price;
+    this.quantity = quantity;
+  }
+
+  calculateTotalPrice() {
+    return this.quantity * this.price;
+  }
+}
+
+class PersonalCareProduct extends Product {
+  constructor(productId, productName, price, quantity, tax) {
+    super(productId, productName, price, quantity);
+    this.tax = tax;
+  }
+
+  calculateTotalPrice() {
+    return super.calculateTotalPrice() + this.tax;
+  }
+}
+
+const newProduct1 = new PersonalCareProduct(15, "milk", 2500, 5, 1000);
+const newProduct2 = new PersonalCareProduct(25, "water", 1500, 10, 850);
+
+console.log(newProduct1.calculateTotalPrice()); // 13500
+console.log(newProduct2.calculateTotalPrice()); // 15850
