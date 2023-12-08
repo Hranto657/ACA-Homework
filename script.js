@@ -93,6 +93,7 @@ const director = new Director("Leonardo", "director");
 // console.log(director.work()) // working
 // console.log(director.sleep()) // Leonardo is sleeping
 
+// LESSON 4 Homework 1
 // Write a JavaScript program that creates a class called Product with properties for product ID, name, and price.
 // Include a method to calculate the total price by multiplying the price by the quantity
 // (quantity: քանակ, պետք ա փոխանվել ֆունկցիային որպես պարամետր).
