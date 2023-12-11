@@ -128,8 +128,8 @@ class PersonalCareProduct extends Product {
 const newProduct1 = new PersonalCareProduct(15, "milk", 2500, 5, 1000);
 const newProduct2 = new PersonalCareProduct(25, "water", 1500, 10, 850);
 
-console.log(newProduct1.calculateTotalPrice()); // 13500
-console.log(newProduct2.calculateTotalPrice()); // 15850
+// console.log(newProduct1.calculateTotalPrice()); // 13500
+// console.log(newProduct2.calculateTotalPrice()); // 15850
 
 // LESSON4 Homework 2
 
@@ -140,7 +140,7 @@ var bunny = {
   },
 };
 
-console.log(bunny.f()); // true
+// console.log(bunny.f()); // true
 // ---------------------------------------------------
 var person = {
   firstName: "Penelope",
@@ -150,7 +150,7 @@ var person = {
   },
 };
 
-console.log(person.getName()); // Penelope Barrymore
+// console.log(person.getName()); // Penelope Barrymore
 // ---------------------------------------------------
 var o = {
   prop: 37,
@@ -158,7 +158,7 @@ var o = {
     return this.prop;
   },
 };
-console.log(o.f()); // 37
+// console.log(o.f()); // 37
 // ---------------------------------------------------
 var golfGames = {
   tournament: "The Masters",
@@ -174,7 +174,7 @@ var golfGames = {
   },
 };
 
-golfGames.showAllGames(); // T. Woods is playing at The Masters, P. Mickelson is playing at The Masters
+// golfGames.showAllGames(); // T. Woods is playing at The Masters, P. Mickelson is playing at The Masters
 // ---------------------------------------------------
 var player1 = {
   firstName: "Jack",
@@ -203,7 +203,7 @@ var game = {
 };
 
 game.players.push(player1, player2);
-game.listPlayers(); // Jack Black, Bunny Rabbit
+// game.listPlayers(); // Jack Black, Bunny Rabbit
 // ---------------------------------------------------
 function setBodyTextColor(color) {
   this.body.style.color = color;
@@ -218,7 +218,7 @@ function getBodyTextColor() {
 }
 
 document.getBodyTextColor = getBodyTextColor;
-console.log(document.getBodyTextColor()); // blue
+// console.log(document.getBodyTextColor()); // blue
 // ---------------------------------------------------
 var Counter = {
   count: 0,
@@ -228,29 +228,179 @@ var Counter = {
 };
 
 Counter.add();
-console.log(Counter.count); // 1
+// console.log(Counter.count); // 1
 var addToCount = Counter.add;
 addToCount();
-console.log(Counter.count); // 1
+// console.log(Counter.count); // 1
 // ---------------------------------------------------
 var Counter = {
-  count: 0,
-  add: function(){
+  count: {
+    currentCount: 0,
+  },
+  add: function () {
     this.count++;
-  }
-}
+  },
+};
 
 Counter.add();
-console.log(Counter.count); // 1
+// console.log(Counter.count); // 1
 
 var AnotherCounter = {};
-AnotherCounter.count = Counter.count;
+AnotherCounter.count = Counter.count.cuurentCount;
 AnotherCounter.add = Counter.add;
 AnotherCounter.add();
 
-console.log(AnotherCounter.count);// 2
-console.log(Counter.count) // 1
+// console.log(AnotherCounter.count);// 2
+// console.log(Counter.count) // 1
 
 var YetAnotherCounter = Counter;
-Counter.add();// 1
-console.log(YetAnotherCounter.count) // 2
+// Counter.add();// 1
+// console.log(YetAnotherCounter.count) // 2
+
+// LESSON 5 Homework 1
+// Փորձեք գուշակել output-ը
+
+var func = function () {
+  console.log(this);
+}.bind(1);
+
+func(); // 1
+// ---------------------------------------------------
+var func = function () {
+  console.log(this);
+}.bind(1);
+
+var obj = {
+  callFun: func,
+};
+obj.callFun.func(); // error - obj.callFun.func is not a function
+// An error occurred because func is a method of the obj.callFun object and can't be called using the func() syntax.
+obj.callFun() // 1
+// ---------------------------------------------------
+function checkFun(a, b, c) {
+  console.log(this); // 1
+  console.log(a); // 2
+  console.log(b); // 3
+  console.log(c); // 4
+}
+checkFun.call(1,2,3,4);
+// ---------------------------------------------------
+function checkFun(a, b, c) {
+  console.log(this); // 1
+  console.log(a); // 2
+  console.log(b); // 3
+  console.log(c); // 4
+}
+checkFun.apply(1,[2,3,4]);
+// ---------------------------------------------------
+function sumOfNumbers() {
+  var total = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+var sum = sumOfNumbers(1, 2, 3);
+console.log(sum); // 6
+// ---------------------------------------------------
+function sumOfNumbers() {
+  var total = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+var sum = sumOfNumbers.call(null, 1, 2, 3);
+console.log(sum); // 6
+// ---------------------------------------------------
+function sumOfNumbers() {
+  var total = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    total += arguments[i];
+  }
+  return total;
+}
+var numbers = [1, 2, 3];
+var sum = sumOfNumbers.apply(null, numbers);
+console.log(sum); // 6
+// ---------------------------------------------------
+function updateZipCode() {
+  console.log(this);
+}
+updateZipCode.call(1); // 1
+// ---------------------------------------------------
+var updateZipCode = function () {
+  console.log(this);
+};
+updateZipCode.call({}); // {}
+// ---------------------------------------------------
+var updateZipCode = function () {
+  console.log(this);
+};
+updateZipCode.call({ zip: '11787'}); // {zip: '11787'}
+// ---------------------------------------------------
+var updateZipCode = function () {
+  console.log(this);
+};
+var zipCode = {
+  zip: "11787",
+};
+updateZipCode.call(zipCode); // {zip: '11787'}
+// ---------------------------------------------------
+var updateZipCode = function (newZip, country) {
+  console.log(newZip + " " + country);
+};
+var zipCode = {
+  zip: "11787",
+};
+updateZipCode.call(zipCode, '11888', 'us'); // 11888 us
+// ---------------------------------------------------
+var updateZipCode = function (newZip, country) {
+  console.log(newZip + " " + country);
+};
+var zipCode = {
+  zip: "11787",
+};
+updateZipCode.apply(zipCode, ['11888', 'us']); // 11888 us
+// ---------------------------------------------------
+("use strict");
+var zipcode = {
+  checkZipcode: function () {
+    console.log(this); // {checkZipcode: f()} or object zipcode
+    function updateZipCode() {
+      console.log(this); // {checkZipcode: f()} or object zipcode
+    }
+    updateZipCode.call(this);
+  },
+};
+zipcode.checkZipcode();
+// ---------------------------------------------------
+("use strict");
+var zipcode = {
+  checkZipcode: function () {
+    console.log(this); // {checkZipcode: f()} or object zipcode
+    var updateZipCode = function () {
+      console.log(this); // {checkZipcode: f()} or object zipcode
+    }.bind(this);
+    updateZipCode();
+  },
+};
+zipcode.checkZipcode();
+// ---------------------------------------------------
+"use strict";
+var person = {
+    name : "Jack",
+    prop : {
+        name : "Daniel",
+        getName : function() {
+            return this.name;
+        }
+    }
+}
+
+var oldname = person.prop.getName.bind(person);
+console.log(oldname()); // Jack
+
+var  oldname = person.prop.getName();
+console.log(oldname); // Daniel
+
