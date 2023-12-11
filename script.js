@@ -260,147 +260,213 @@ var YetAnotherCounter = Counter;
 // LESSON 5 Homework 1
 // Փորձեք գուշակել output-ը
 
-var func = function () {
-  console.log(this);
-}.bind(1);
+// var func = function () {
+//   console.log(this);
+// }.bind(1);
 
-func(); // 1
-// ---------------------------------------------------
-var func = function () {
-  console.log(this);
-}.bind(1);
+// func(); // 1
+// // ---------------------------------------------------
+// var func = function () {
+//   console.log(this);
+// }.bind(1);
 
-var obj = {
-  callFun: func,
-};
-obj.callFun.func(); // error - obj.callFun.func is not a function
-// An error occurred because func is a method of the obj.callFun object and can't be called using the func() syntax.
-obj.callFun() // 1
-// ---------------------------------------------------
-function checkFun(a, b, c) {
-  console.log(this); // 1
-  console.log(a); // 2
-  console.log(b); // 3
-  console.log(c); // 4
+// var obj = {
+//   callFun: func,
+// };
+// obj.callFun.func(); // error - obj.callFun.func is not a function
+// // An error occurred because func is a method of the obj.callFun object and can't be called using the func() syntax.
+// obj.callFun() // 1
+// // ---------------------------------------------------
+// function checkFun(a, b, c) {
+//   console.log(this); // 1
+//   console.log(a); // 2
+//   console.log(b); // 3
+//   console.log(c); // 4
+// }
+// checkFun.call(1,2,3,4);
+// // ---------------------------------------------------
+// function checkFun(a, b, c) {
+//   console.log(this); // 1
+//   console.log(a); // 2
+//   console.log(b); // 3
+//   console.log(c); // 4
+// }
+// checkFun.apply(1,[2,3,4]);
+// // ---------------------------------------------------
+// function sumOfNumbers() {
+//   var total = 0;
+//   for (var i = 0; i < arguments.length; i++) {
+//     total += arguments[i];
+//   }
+//   return total;
+// }
+// var sum = sumOfNumbers(1, 2, 3);
+// console.log(sum); // 6
+// // ---------------------------------------------------
+// function sumOfNumbers() {
+//   var total = 0;
+//   for (var i = 0; i < arguments.length; i++) {
+//     total += arguments[i];
+//   }
+//   return total;
+// }
+// var sum = sumOfNumbers.call(null, 1, 2, 3);
+// console.log(sum); // 6
+// // ---------------------------------------------------
+// function sumOfNumbers() {
+//   var total = 0;
+//   for (var i = 0; i < arguments.length; i++) {
+//     total += arguments[i];
+//   }
+//   return total;
+// }
+// var numbers = [1, 2, 3];
+// var sum = sumOfNumbers.apply(null, numbers);
+// console.log(sum); // 6
+// // ---------------------------------------------------
+// function updateZipCode() {
+//   console.log(this);
+// }
+// updateZipCode.call(1); // 1
+// // ---------------------------------------------------
+// var updateZipCode = function () {
+//   console.log(this);
+// };
+// updateZipCode.call({}); // {}
+// // ---------------------------------------------------
+// var updateZipCode = function () {
+//   console.log(this);
+// };
+// updateZipCode.call({ zip: '11787'}); // {zip: '11787'}
+// // ---------------------------------------------------
+// var updateZipCode = function () {
+//   console.log(this);
+// };
+// var zipCode = {
+//   zip: "11787",
+// };
+// updateZipCode.call(zipCode); // {zip: '11787'}
+// // ---------------------------------------------------
+// var updateZipCode = function (newZip, country) {
+//   console.log(newZip + " " + country);
+// };
+// var zipCode = {
+//   zip: "11787",
+// };
+// updateZipCode.call(zipCode, '11888', 'us'); // 11888 us
+// // ---------------------------------------------------
+// var updateZipCode = function (newZip, country) {
+//   console.log(newZip + " " + country);
+// };
+// var zipCode = {
+//   zip: "11787",
+// };
+// updateZipCode.apply(zipCode, ['11888', 'us']); // 11888 us
+// // ---------------------------------------------------
+// ("use strict");
+// var zipcode = {
+//   checkZipcode: function () {
+//     console.log(this); // {checkZipcode: f()} or object zipcode
+//     function updateZipCode() {
+//       console.log(this); // {checkZipcode: f()} or object zipcode
+//     }
+//     updateZipCode.call(this);
+//   },
+// };
+// zipcode.checkZipcode();
+// // ---------------------------------------------------
+// ("use strict");
+// var zipcode = {
+//   checkZipcode: function () {
+//     console.log(this); // {checkZipcode: f()} or object zipcode
+//     var updateZipCode = function () {
+//       console.log(this); // {checkZipcode: f()} or object zipcode
+//     }.bind(this);
+//     updateZipCode();
+//   },
+// };
+// zipcode.checkZipcode();
+// // ---------------------------------------------------
+// "use strict";
+// var person = {
+//     name : "Jack",
+//     prop : {
+//         name : "Daniel",
+//         getName : function() {
+//             return this.name;
+//         }
+//     }
+// }
+
+// var oldname = person.prop.getName.bind(person);
+// console.log(oldname()); // Jack
+
+// var  oldname = person.prop.getName();
+// console.log(oldname); // Daniel
+
+// LESSON 5 Homework 2
+
+function f() {
+  alert(this); // null
 }
-checkFun.call(1,2,3,4);
+
+let user = {
+  g: f.bind(null),
+};
+
+user.g();
 // ---------------------------------------------------
-function checkFun(a, b, c) {
-  console.log(this); // 1
-  console.log(a); // 2
-  console.log(b); // 3
-  console.log(c); // 4
+function f() {
+  alert(this.name); // Вася
 }
-checkFun.apply(1,[2,3,4]);
+
+f = f.bind({ name: "Вася" }).bind({ name: "Петя" });
+
+f();
 // ---------------------------------------------------
-function sumOfNumbers() {
-  var total = 0;
-  for (var i = 0; i < arguments.length; i++) {
-    total += arguments[i];
-  }
-  return total;
+function sayHi() {
+  alert(this.name);
 }
-var sum = sumOfNumbers(1, 2, 3);
-console.log(sum); // 6
+sayHi.test = 5;
+
+let bound = sayHi.bind({
+  name: "Вася",
+});
+
+alert(bound.test); // undefined
 // ---------------------------------------------------
-function sumOfNumbers() {
-  var total = 0;
-  for (var i = 0; i < arguments.length; i++) {
-    total += arguments[i];
-  }
-  return total;
+function askPassword(ok, fail) {
+  let password = prompt("Password?", "");
+  if (password == "rockstar") ok();
+  else fail();
 }
-var sum = sumOfNumbers.call(null, 1, 2, 3);
-console.log(sum); // 6
-// ---------------------------------------------------
-function sumOfNumbers() {
-  var total = 0;
-  for (var i = 0; i < arguments.length; i++) {
-    total += arguments[i];
-  }
-  return total;
-}
-var numbers = [1, 2, 3];
-var sum = sumOfNumbers.apply(null, numbers);
-console.log(sum); // 6
-// ---------------------------------------------------
-function updateZipCode() {
-  console.log(this);
-}
-updateZipCode.call(1); // 1
-// ---------------------------------------------------
-var updateZipCode = function () {
-  console.log(this);
-};
-updateZipCode.call({}); // {}
-// ---------------------------------------------------
-var updateZipCode = function () {
-  console.log(this);
-};
-updateZipCode.call({ zip: '11787'}); // {zip: '11787'}
-// ---------------------------------------------------
-var updateZipCode = function () {
-  console.log(this);
-};
-var zipCode = {
-  zip: "11787",
-};
-updateZipCode.call(zipCode); // {zip: '11787'}
-// ---------------------------------------------------
-var updateZipCode = function (newZip, country) {
-  console.log(newZip + " " + country);
-};
-var zipCode = {
-  zip: "11787",
-};
-updateZipCode.call(zipCode, '11888', 'us'); // 11888 us
-// ---------------------------------------------------
-var updateZipCode = function (newZip, country) {
-  console.log(newZip + " " + country);
-};
-var zipCode = {
-  zip: "11787",
-};
-updateZipCode.apply(zipCode, ['11888', 'us']); // 11888 us
-// ---------------------------------------------------
-("use strict");
-var zipcode = {
-  checkZipcode: function () {
-    console.log(this); // {checkZipcode: f()} or object zipcode
-    function updateZipCode() {
-      console.log(this); // {checkZipcode: f()} or object zipcode
-    }
-    updateZipCode.call(this);
+
+let user = {
+  name: "Вася",
+
+  loginOk() {
+    alert(`${this.name} logged in`);
+  },
+
+  loginFail() {
+    alert(`${this.name} failed to log in`);
   },
 };
-zipcode.checkZipcode();
+
+askPassword(user.loginOk, user.loginFail); // askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 // ---------------------------------------------------
-("use strict");
-var zipcode = {
-  checkZipcode: function () {
-    console.log(this); // {checkZipcode: f()} or object zipcode
-    var updateZipCode = function () {
-      console.log(this); // {checkZipcode: f()} or object zipcode
-    }.bind(this);
-    updateZipCode();
-  },
-};
-zipcode.checkZipcode();
-// ---------------------------------------------------
-"use strict";
-var person = {
-    name : "Jack",
-    prop : {
-        name : "Daniel",
-        getName : function() {
-            return this.name;
-        }
-    }
+function askPassword(ok, fail) {
+  let password = prompt("Password?", '');
+  if (password == "rockstar") ok();
+  else fail();
 }
 
-var oldname = person.prop.getName.bind(person);
-console.log(oldname()); // Jack
+let user = {
+  name: 'John',
 
-var  oldname = person.prop.getName();
-console.log(oldname); // Daniel
+  login(result) {
+    alert( this.name + (result ? ' logged in' : ' failed to log in') );
+  }
+};
 
+askPassword(?, ?); // askPassword(user.login.bind(user, true), user.login.bind(user, false));
