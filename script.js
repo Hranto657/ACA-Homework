@@ -470,3 +470,72 @@ let user = {
 };
 
 askPassword(?, ?); // askPassword(user.login.bind(user, true), user.login.bind(user, false));
+
+// Homework 1
+// Ստեղծել Network class-ը, որը իրենից կներկայացնի ինչ-որ սոցիալական ցանցի նկարագրություն։
+// Network-ը պետք է ունենա user-ների զանգված ու անուն (կարող եք ուրիշ դաշտեր էլ սարքել ըստ անհրաժեշտության).
+// Network-ից ստեղծեք օբյեկտ՝ instagram անունով։ Ստեղծել նաև User class-ը, որտեղ յուրաքանչյուր user կունենա
+// username, password, name, lastname. Երբ նոր մարդ է ավելանում instangram-ին, պետք է ստեղծել նոր user օբյեկտ ու իրեն ավելացնել
+// instagram-ի user-ների ցուցակին։ User-ում, password-ը պետք է հասանելի չլինի արտաքին աշխարհից, փոխարենը պետք է ունենալ
+// checkPassword մեթոդ, որը կարող ենք կանչել որպես պարամետր տալով ինչ-որ սթրինգ ու
+// հետ կստանանք true կամ false` կախված նրանից թե գաղտնաբառը ճիշտ էր թե չէ։
+// Յուրաքանչյուր user instagram-ին միանալուց ստանում է հերթական համար` id.
+
+// Network կլասսի մեթոդներն են՝
+// addUser(user): Ստանում է որպես պարամետր User class-ի օբյեկտ ավելացնում է հերթական id ու պահպանում users զանգվածի մեջ
+// removeUser(username): Ստանում է որպես պարամետր ինչ-որ մարդու username ու users-ից հեռացնում է այդ օգտատիրոջը
+// login(username, password): Ստանում է որպես պարամետր ինչ-որ username ու password ու ստուգում է արդյոք
+// դրանք համապատասխանում են գոյություն ունեցող user-ի թե չէ։ Վերադարձնում է true կամ false
+
+class Network {
+  users = [];
+  constructor(name) {
+    this.name = name;
+  }
+
+  addUser(user) {
+    let id = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+
+    while (this.users.some((u) => u.id === id)) {
+      id = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    }
+
+    user.id = id;
+    this.users = [...this.users, user];
+  }
+  removeUser(userName) {
+    this.users = this.users.filter((user) => {
+      return user.userName !== userName;
+    });
+  }
+  login(userName, password) {
+    return this.users.some((user) => {
+      return user.userName === userName && user.checkPassword(password);
+    });
+  }
+}
+
+class User {
+  #password;
+  constructor(userName, password, name, lastName) {
+    this.userName = userName;
+    this.#password = password;
+    this.name = name;
+    this.lastName = lastName;
+  }
+
+  checkPassword(currentPassword) {
+    if (currentPassword === this.#password) {
+      return true;
+    }
+    return false;
+  }
+}
+const instagram = new Network("instagram");
+const user1 = new User("user657", 12345, "guest", "user");
+const user2 = new User("user988", "Test1234", "guesting", "guest");
+instagram.addUser(user1);
+instagram.addUser(user2);
+instagram.removeUser("user988");
+const login = instagram.login("user657", 12345);
+console.log(login); // true || false
