@@ -471,7 +471,7 @@ let user = {
 
 askPassword(?, ?); // askPassword(user.login.bind(user, true), user.login.bind(user, false));
 
-// Homework 1
+// Lesson 7 Homework 1
 // Ստեղծել Network class-ը, որը իրենից կներկայացնի ինչ-որ սոցիալական ցանցի նկարագրություն։
 // Network-ը պետք է ունենա user-ների զանգված ու անուն (կարող եք ուրիշ դաշտեր էլ սարքել ըստ անհրաժեշտության).
 // Network-ից ստեղծեք օբյեկտ՝ instagram անունով։ Ստեղծել նաև User class-ը, որտեղ յուրաքանչյուր user կունենա
@@ -539,3 +539,68 @@ instagram.addUser(user2);
 instagram.removeUser("user988");
 const login = instagram.login("user657", 12345);
 console.log(login); // true || false
+console.log(instagram)
+
+// Lesson 7 Homework 2
+// Փորձեք գրել Network class-ը առանց class syntax-ն օգտագործելու (կոնստրուկտոր ֆունկցիաներով)
+
+function Network(name) {
+  this.name = name;
+  this.users = [];
+
+  this.addUser = function (user) {
+    let id = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+
+    while (this.users.some((u) => u.id === id)) {
+      id = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    }
+
+    user.id = id;
+    this.users = [...this.users, user];
+  };
+  this.removeUser = function (userName) {
+    this.users = this.users.filter((user) => {
+      return user.userName !== userName;
+    });
+  };
+  this.login = function (userName, password) {
+    return this.users.some((user) => {
+      return user.userName === userName && user.checkPassword(password);
+    });
+  };
+}
+
+function User({ userName, password, name, lastName }) {
+  this.userName = userName;
+  this.password = password;
+  this.name = name;
+  this.lastName = lastName;
+
+  this.checkPassword = function (currentPassword) {
+    if (currentPassword === this.password) {
+      return true;
+    }
+    return false;
+  };
+}
+const instagram = new Network("instagram");
+const user1Obj = {
+  userName: "user657",
+  password: 12345,
+  name: "guest",
+  lastName: "user",
+};
+const user1 = new User(user1Obj);
+const user2Obj = {
+  userName: "user988",
+  password: "Test1234",
+  name: "guesting",
+  lastName: "guest",
+};
+const user2 = new User(user2Obj);
+instagram.addUser(user1);
+instagram.addUser(user2);
+instagram.removeUser("user988");
+const login = instagram.login("user657", 12345);
+console.log(login); // true || false
+console.log(instagram);
