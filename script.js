@@ -604,3 +604,105 @@ instagram.removeUser("user988");
 const login = instagram.login("user657", 12345);
 console.log(login); // true || false
 console.log(instagram);
+
+// Lesson 8 Homework 1
+// Create a class named “Document”.The Document class should have a static property describing its maximum size.
+// The value of the maximum size can any number indicating the maximum size of the size in MegaBytes.
+// Each document should have a size.Everyone should be able to read and set the size of every document,
+// only if the new size is smaller than the maximum allowed size.
+// Every document should have a getContents method which returns the text “The file is empty”.
+// Create a class named TextDocument and inherit everything from Document class.
+// The objects of TextDocument class also have a property “contents” which is being initialized when creating the object.
+// Override the getContents method to return the value of contents field instead of the “The file is empty” string.
+
+class Document {
+  static maxSizeInMB = 2048;
+  constructor() {
+    this.size = 0;
+  }
+
+  setSize(newSize) {
+    if (newSize < Document.maxSizeInMB) {
+      this.size = newSize;
+      console.log(`Size set to ${newSize} MB.`);
+    } else {
+      console.log(
+        `Error: Size exceeds the maximum allowed size of ${Document.maxSizeInMB} MB.`
+      );
+    }
+  }
+  getSize() {
+    return this.size;
+  }
+  getContents() {
+    return "The file is empty";
+  }
+}
+
+class TextDocument extends Document {
+  constructor(contents) {
+    super();
+    this.contents = contents;
+  }
+
+  getContents() {
+    return this.contents;
+  }
+}
+
+const document1 = new Document();
+document1.setSize(1000);
+console.log(document1)
+
+const textDocument1 = new TextDocument("Overrided text instead of 'the the file is empty'");
+textDocument1.setSize(2050);
+console.log(textDocument1.getContents());
+
+// Lesson 8 Homework 2
+// Write the code in the previous example without using the class syntax
+
+function Document() {
+  this.size = 0;
+}
+
+Document.maxSizeInMB = 2048;
+
+Document.prototype.getSize = function () {
+  return this.size;
+};
+
+Document.prototype.setSize = function (newSize) {
+  if (newSize < Document.maxSizeInMB) {
+    this.size = newSize;
+    console.log(`Size set to ${newSize} MB.`);
+  } else {
+    console.log(
+      `Error: Size exceeds the maximum allowed size of ${Document.maxSizeInMB} MB.`
+    );
+  }
+};
+
+Document.prototype.getContents = function () {
+  return "The file is empty";
+};
+
+console.log(new Document());
+function TextDocument(contents) {
+  Document.call(this);
+  this.contents = contents;
+}
+
+TextDocument.prototype = Object.create(Document.prototype);
+TextDocument.prototype.constructor = TextDocument;
+
+TextDocument.prototype.getContents = function () {
+  return this.contents;
+};
+console.log(new TextDocument());
+const document1 = new Document();
+document1.setSize(1000);
+console.log(document1);
+
+const textDocument1 = new TextDocument("Overrided text instead of 'the the file is empty'");
+textDocument1.setSize(2050);
+console.log(textDocument1.getContents());
