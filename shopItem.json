@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "image": "/images/phone-1.jpg",
+    "alt": "Phone 1 image",
+    "title": "Phone 1",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 2,
+    "image": "/images/phone-2.jpg",
+    "alt": "Phone 2 image",
+    "title": "Phone 2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 3,
+    "image": "/images/phone-3.jpg",
+    "alt": "Phone 3 image",
+    "title": "Phone 3",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 4,
+    "image": "/images/phone-4.jpg",
+    "alt": "Phone 4 image",
+    "title": "Phone 4",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 5,
+    "image": "/images/phone-1.jpg",
+    "alt": "Phone 5 image",
+    "title": "Phone 5",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 6,
+    "image": "/images/phone-2.jpg",
+    "alt": "Phone 6 image",
+    "title": "Phone 6",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 7,
+    "image": "/images/phone-3.jpg",
+    "alt": "Phone 7 image",
+    "title": "Phone 7",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  {
+    "id": 8,
+    "image": "/images/phone-4.jpg",
+    "alt": "Phone 8 image",
+    "title": "Phone 8",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  }
+]
