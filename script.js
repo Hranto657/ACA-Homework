@@ -22,30 +22,33 @@ document.body.getElementsByClassName("header-title")[0].innerHTML =
   "My Online Shop";
 document.body.getElementsByClassName("main")[0].appendChild(mainBlock);
 
-fetch("./shopItem.json")
-  .then((response) => response.json())
-  .then((data) => {
-    data.forEach((item) => {
-      const shopItem = document.createElement("div");
-      const shopItemImage = document.createElement("img");
-      const shopItemTitle = document.createElement("h2");
-      const shopItemDescription = document.createElement("p");
+async function getShopItems() {
+  const response = await fetch("./shopItem.json");
+  const shopItems = await response.json();
 
-      shopItem.setAttribute("class", "shop-item");
-      shopItemImage.setAttribute("src", item.image);
-      shopItemImage.setAttribute("alt", item.alt);
+  return shopItems;
+}
 
-      shopItemTitle.innerHTML = item.title;
-      shopItemDescription.innerHTML = item.description;
+getShopItems().then(drawItems);
 
-      shopItem.appendChild(shopItemTitle);
-      shopItem.appendChild(shopItemImage);
-      shopItem.appendChild(shopItemDescription);
-      document.body
-        .getElementsByClassName("main-block")[0]
-        .appendChild(shopItem);
-    });
-  })
-  .catch((error) => {
-    console.error("Ошибка при загрузке файла:", error);
+function drawItems(data) {
+  data.forEach((item) => {
+    const shopItem = document.createElement("div");
+    const shopItemImage = document.createElement("img");
+    const shopItemTitle = document.createElement("h2");
+    const shopItemDescription = document.createElement("p");
+
+    shopItem.setAttribute("class", "shop-item");
+    shopItemImage.setAttribute("src", item.image);
+    shopItemImage.setAttribute("alt", item.alt);
+
+    shopItemTitle.innerHTML = item.title;
+    shopItemDescription.innerHTML = item.description;
+
+    shopItem.appendChild(shopItemTitle);
+    shopItem.appendChild(shopItemImage);
+    shopItem.appendChild(shopItemDescription);
+    document.body.getElementsByClassName("main-block")[0].appendChild(shopItem);
   });
+}
+
