@@ -4,10 +4,10 @@ const headerTitle = document.createElement("h1");
 const icon = document.createElement("img");
 const mainBlock = document.createElement("div");
 
-main.setAttribute("class", "main");
+main.classList.add("class", "main");
 headerBlock.setAttribute("class", "header-block");
 headerTitle.setAttribute("class", "header-title");
-icon.setAttribute("class", "icon");
+icon.classList.add("class", "icon");
 icon.setAttribute("src", "/images/shop_icon.png");
 icon.setAttribute("alt", "Online Shop Icon");
 mainBlock.setAttribute("class", "main-block");
@@ -38,7 +38,7 @@ function drawItems(data) {
     const shopItemTitle = document.createElement("h2");
     const shopItemDescription = document.createElement("p");
 
-    shopItem.setAttribute("class", "shop-item");
+    shopItem.classList.add("class", "shop-item");
     shopItemImage.setAttribute("src", item.image);
     shopItemImage.setAttribute("alt", item.alt);
 
@@ -51,4 +51,3 @@ function drawItems(data) {
     document.body.getElementsByClassName("main-block")[0].appendChild(shopItem);
   });
 }
-
