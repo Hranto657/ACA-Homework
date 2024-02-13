@@ -28,6 +28,8 @@
   width: 300px;
   height: 200px;
   border: 1px solid black;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .shop-item > p {
   text-align: center;
