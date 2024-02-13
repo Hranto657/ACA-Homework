@@ -1,26 +1,26 @@
-const main = document.createElement("div");
-const headerBlock = document.createElement("div");
 const headerTitle = document.createElement("h1");
-const icon = document.createElement("img");
-const mainBlock = document.createElement("div");
+headerTitle.classList.add("header-title");
+headerTitle.innerHTML = "My Online Shop";
 
-main.classList.add("class", "main");
-headerBlock.setAttribute("class", "header-block");
-headerTitle.setAttribute("class", "header-title");
+const icon = document.createElement("img");
 icon.classList.add("class", "icon");
 icon.setAttribute("src", "/images/shop_icon.png");
 icon.setAttribute("alt", "Online Shop Icon");
-mainBlock.setAttribute("class", "main-block");
+
+const headerBlock = document.createElement("div");
+headerBlock.classList.add("header-block");
+headerBlock.appendChild(headerTitle);
+headerBlock.appendChild(icon);
+
+const mainBlock = document.createElement("div");
+mainBlock.classList.add("main-block");
+
+const main = document.createElement("div");
+main.classList.add("main");
+main.appendChild(headerBlock);
+main.appendChild(mainBlock);
 
 document.body.appendChild(main);
-document.body.getElementsByClassName("main")[0].appendChild(headerBlock);
-document.body.getElementsByClassName("header-block")[0].appendChild(icon);
-document.body
-  .getElementsByClassName("header-block")[0]
-  .appendChild(headerTitle);
-document.body.getElementsByClassName("header-title")[0].innerHTML =
-  "My Online Shop";
-document.body.getElementsByClassName("main")[0].appendChild(mainBlock);
 
 async function getShopItems() {
   const response = await fetch("./shopItem.json");
@@ -34,20 +34,21 @@ getShopItems().then(drawItems);
 function drawItems(data) {
   data.forEach((item) => {
     const shopItem = document.createElement("div");
-    const shopItemImage = document.createElement("img");
-    const shopItemTitle = document.createElement("h2");
-    const shopItemDescription = document.createElement("p");
-
     shopItem.classList.add("class", "shop-item");
+    
+    const shopItemImage = document.createElement("img");
     shopItemImage.setAttribute("src", item.image);
     shopItemImage.setAttribute("alt", item.alt);
-
-    shopItemTitle.innerHTML = item.title;
-    shopItemDescription.innerHTML = item.description;
-
-    shopItem.appendChild(shopItemTitle);
     shopItem.appendChild(shopItemImage);
+    
+    const shopItemTitle = document.createElement("h2");
+    shopItemTitle.innerHTML = item.title;
+    shopItem.appendChild(shopItemTitle);
+    
+    const shopItemDescription = document.createElement("p");
+    shopItemDescription.innerHTML = item.description;
     shopItem.appendChild(shopItemDescription);
-    document.body.getElementsByClassName("main-block")[0].appendChild(shopItem);
+    
+    mainBlock.appendChild(shopItem);
   });
 }
